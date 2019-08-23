@@ -1,0 +1,124 @@
+<!--*ngIf判空-->
+
+
+<h2>My Heroes</h2>
+<ul class="heroes">
+  <li *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="onSelect(hero)">
+    <span class="badge">{{hero.id}}</span> {{hero.name}}
+  </li>
+</ul>
+<!--<mat-list>
+  <mat-list-item> Pepper </mat-list-item>
+  <mat-list-item> Salt </mat-list-item>
+  <mat-list-item> Paprika </mat-list-item>
+</mat-list>-->
+
+<table>
+  <thead>　　
+  <tr>　　
+    <th>序号</th>
+    <th>名称</th>　　
+  </tr>
+  </thead>
+  <tbody>　
+ <!-- <tr *ngFor="let Hero of heroes">
+    <td>{{Hero.id}}</td>
+    <td>{{Hero.name}}</td>
+  </tr>-->
+
+  <tr *ngIf = "pageIndex == 0" >
+    <td>{{heroes[pageIndex * 5].id}}</td>
+    <td>{{heroes[pageIndex * 5].name}}</td>
+
+<!--    <div *ngIf="show; then thenBlock; else elseBlock">this is ignored</div>
+    <ng-template #thenBlock>如果show的值是真,则显示这段</ng-template>
+    <ng-template #elseBlock>如果show的值是假,则显示这段</ng-template>-->
+
+ <!--   <td>{{heroes[pageIndex * 5 + 1].id}}</td>
+    <td>{{heroes[pageIndex * 5 + 1].name}}</td>
+
+    <td>{{heroes[pageIndex * 5  + 2].id}}</td>
+    <td>{{heroes[pageIndex * 5 + 2].name}}</td>
+
+    <td>{{heroes[pageIndex * 5 + 3].id}}</td>
+    <td>{{heroes[pageIndex * 5 + 3].name}}</td>
+
+    <td>{{heroes[pageIndex * 5 + 4].id}}</td>
+    <td>{{heroes[pageIndex * 5 + 4].name}}</td>-->
+
+  <tr  *ngIf = "pageIndex > 0"><!--*ngFor="let Hero of heroes"-->
+    <td>{{heroes[pageIndex * 5].id}}</td>
+    <td>{{heroes[pageIndex * 5].name}}</td>
+
+    <!--    <div *ngIf="show; then thenBlock; else elseBlock">this is ignored</div>
+        <ng-template #thenBlock>如果show的值是真,则显示这段</ng-template>
+        <ng-template #elseBlock>如果show的值是假,则显示这段</ng-template>-->
+
+    <td>{{heroes[pageIndex * 5 + 1].id}}</td>
+    <td>{{heroes[pageIndex * 5 + 1].name}}</td>
+
+    <td>{{heroes[pageIndex * 5  + 2].id}}</td>
+    <td>{{heroes[pageIndex * 5 + 2].name}}</td>
+
+    <td>{{heroes[pageIndex * 5 + 3].id}}</td>
+    <td>{{heroes[pageIndex * 5 + 3].name}}</td>
+
+    <td>{{heroes[pageIndex * 5 + 4].id}}</td>
+    <td>{{heroes[pageIndex * 5 + 4].name}}</td>
+  </tr>
+  </tbody>
+</table>
+<mat-paginator [length] = "10"
+               [pageSize] = "1"
+               [pageSizeOptions] = "[5, 10, 0, 100]"
+               [showFirstLastButtons] = "false"
+               [disabled] = "false"
+               (page) = "pageEvent = $event"
+                (click) = "getIndex(pageEvent.pageIndex)">
+</mat-paginator>
+<div *ngIf = "pageEvent" pageIndex = pageEvent.pageIndex>
+  <h5>Page Change Event</h5>
+  <div>List length: {{pageEvent.length}}</div>
+  <div>Page size: {{pageEvent.pageSize}}</div>
+  <div>Page index: {{pageEvent.pageIndex}}</div><!--[pageIndex] = "pageEvent.pageIndex"-->
+</div>
+
+<!--<div *ngIf="pageEvent">
+  <h5>Page Change Event Properties</h5>
+  <div>List length: {{pageEvent.length}}</div>
+  <div>Page size: {{pageEvent.pageSize}}</div>
+  <div>Page index: {{pageEvent.pageIndex}}</div>
+</div>-->
+
+<!--<ul uib-pagination ng-show="search.totalItems"
+    total-items="search.totalItems"
+    items-per-page="search.pageSize"
+    class="pagination-sm"
+    boundary-link-numbers="true"
+    ng-change="pageChanged()"
+    ng-model="search.currentPage"></ul>-->
+
+
+
+<!--<div class="row">
+  <div class="pull-right">
+    <nav>
+      <ul class="pagination">
+        <li>
+          <a ng-click="Previous()" role="button">
+            <span role="button">上一页</span>
+          </a>
+        </li>
+        <li ng-repeat="page in pageList" ng-class="{active: isActivePage(page)}" role="button">
+          <a ng-click="selectPage(page)">{{ page }}</a>
+        </li>
+        <li>
+          <a ng-click="Next()" role="button">
+            <span role="button">下一页</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>-->
+<app-hero-detail [hero_detail]="selectedHero"></app-hero-detail>
